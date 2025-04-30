@@ -1,4 +1,12 @@
 <?php
+$ip = $_SERVER['HTTP_CLIENT_IP']
+    ?? $_SERVER['HTTP_X_FORWARDED_FOR']
+    ?? $_SERVER['REMOTE_ADDR'];
+
+$date = date("Y-m-d H:i:s");
+$logLine = "$date - IP: $ip\n";
+
+file_put_contents("log.txt", $logLine, FILE_APPEND);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,20 +22,18 @@
         box-sizing: border-box;
     }
 
-    html {
-        font-family: sans-serif;
-        line-height: 1.5;
-        font-weight: 400;
-        -webkit-text-size-adjust: 100%;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    }
-
     body {
         height: 100vh;
         background-image: url(assets/Background.png);
         background-size: cover;
         margin: 0;
         padding: 0;
+        margin: 0;
+        font-family: BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: .9375rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #1d2125;
     }
 
     @media (min-width: 576px) {
@@ -94,17 +100,20 @@
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 
+    .form-control:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #0cc5ff;
+        outline: 0;
+        box-shadow: 0 0 0 .2rem rgba(0, 106, 139, .75);
+    }
+
     .form-control-lg {
         height: calc(1.5em + 1rem + 2px);
         padding: .5rem 1rem;
         font-size: 1.171875rem;
         line-height: 1.5;
         border-radius: .6rem;
-    }
-
-    b,
-    strong {
-        font-weight: bolder;
     }
 
     a {
@@ -156,13 +165,13 @@
     }
 
     .mx {
-        margin-right: 0.5rem !important;
-        margin-left: 0.5rem !important;
+        margin-left: 0.2rem !important;
     }
 
     .btn {
         display: inline-block;
         font-weight: 400;
+        font-family: BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         color: #1d2125;
         text-align: center;
         vertical-align: middle;
@@ -194,7 +203,22 @@
         color: #fff;
         background-color: #006a8b;
         border-color: #006a8b;
+        font-weight: 300;
     }
+
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #004d65;
+        border-color: #004358;
+    }
+
+    .btn-primary:not(:disabled):not(.disabled):active:focus {
+        color: #fff !important;
+        background-color: #004358 !important;
+        border-color: #00394b !important;
+        box-shadow: 0 0 0 .2rem rgba(38, 128, 156, .5);
+        transition: color 0.05s ease-in-out, background-color 0.05s ease-in-out, border-color 0.05s ease-in-out, box-shadow 0.05s ease-in-out;
+}
 
     .btn-secondary {
         color: #1d2125;
@@ -233,8 +257,8 @@
     }
 
     .bg-secondary {
-    background-color: #ced4da !important;
-}
+        background-color: #ced4da !important;
+    }
     
     .btn.btn-icon {
         height: 36px;
@@ -278,14 +302,14 @@
     }
 
     @media (min-width: 576px) {
-    #page-wrapper #page-footer {
+        #page-wrapper #page-footer {
         flex-shrink: 0;
+        }
     }
-}
 
-#page-footer {
-    background-color: #006a8b !important;
-}
+    #page-footer {
+        background-color: #006a8b !important;
+    }
 </style>
 
 <body>
