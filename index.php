@@ -6,11 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Moodle UM: Log in to the site | Univerza Phishinga</title>
 </head>
 <style>
-
-* {
+    * {
         box-sizing: border-box;
     }
 
@@ -29,6 +29,14 @@
         margin: 0;
         padding: 0;
     }
+
+    @media (min-width: 576px) {
+    #page-wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
 
     .login-wrapper {
         display: flex;
@@ -92,12 +100,6 @@
         font-size: 1.171875rem;
         line-height: 1.5;
         border-radius: .6rem;
-    }
-
-    @media (max-width: 1200px) {
-        .form-control-lg {
-            font-size: calc(0.9271875rem + 0.32625vw);
-        }
     }
 
     b,
@@ -180,20 +182,6 @@
         text-decoration: none;
     }
 
-    @media (max-width: 1200px) {
-        .btn {
-            font-size: calc(0.90375rem + 0.045vw);
-        }
-    }
-
-    @media (max-width: 1200px) {
-
-        .btn-lg,
-        .btn-group-lg>.btn {
-            font-size: calc(0.9271875rem + 0.32625vw);
-        }
-    }
-
     .btn-lg,
     .btn-group-lg>.btn {
         padding: .5rem 1rem;
@@ -236,9 +224,72 @@
         border-right: 4px solid transparent;
         border-left: 4px solid transparent;
     }
+
+    .btn-footer-popover {
+        display: block;
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+    }
+
+    .bg-secondary {
+    background-color: #ced4da !important;
+}
+    
+    .btn.btn-icon {
+        height: 36px;
+        width: 36px;
+        font-size: 16px;
+        line-height: 16px;
+        padding: 0;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .icon-no-margin .icon {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        padding: 0;
+        box-sizing: content-box;
+        margin-right: .5rem;
+    }
+
+    .fa-fw {
+        width: 1.28574em;
+        text-align: center;
+    }
+
+    .fa {
+        display: inline-block;
+        font: normal normal normal 14px / 1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media (min-width: 576px) {
+    #page-wrapper #page-footer {
+        flex-shrink: 0;
+    }
+}
+
+#page-footer {
+    background-color: #006a8b !important;
+}
 </style>
 
 <body>
+    <div id="page-wrapper">
     <div class="login-wrapper">
         <div class="login-container">
             <div class="login-logo">
@@ -289,6 +340,14 @@
             </form>
         </div>
     </div>
+    </div>
+    <footer id="page-footer">
+        <div data-region="footer-container-popover">
+            <button class="btn btn-icon bg-secondary icon-no-margin btn-footer-popover" aria-label="Show footer" data-action="footer-popover">
+                <i class="icon fa fa-question fa-fw" aria-hidden="true"></i>
+            </button>
+        </div>
+    </footer>
 </body>
 
 </html>
