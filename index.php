@@ -1,5 +1,4 @@
 <?php
-// Optional: handle login logic here (not implemented in this static version)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +24,10 @@
 
     body {
         height: 100vh;
-        background-image: url(/Screenshot\ 2025-04-28\ at\ 22.18.43.png);
+        background-image: url(assets/Background.png);
         background-size: cover;
+        margin: 0;
+        padding: 0;
     }
 
     .login-wrapper {
@@ -40,7 +41,6 @@
         background-color: #fff;
         padding: 3rem;
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
-        margin-bottom: 2rem;
         max-width: 600px;
         border-radius: .5rem;
     }
@@ -242,7 +242,7 @@
     <div class="login-wrapper">
         <div class="login-container">
             <div class="login-logo">
-                <img src="/umestudij.png" alt="logo">
+                <img src="assets/umestudij.png" alt="logo">
             </div>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="login-form">
                 <div class="login-form-username form-group">
