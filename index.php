@@ -4,8 +4,21 @@ $ip = $_SERVER['HTTP_CLIENT_IP']
     ?? $_SERVER['REMOTE_ADDR'];
 
 $date = date("Y-m-d H:i:s");
-$logLine = "$date - IP: $ip\n";
 
+$event = "PAGE VISITED";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = trim($_POST['username'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+
+    if ($username === '' && $password === '') {
+        $event = "EMPTY SUBMISSION";
+    } else {
+        $event = "FORM SUBMITTED";
+    }
+}
+
+$logLine = "$date - IP: $ip - $event\n";
 file_put_contents("log.txt", $logLine, FILE_APPEND);
 ?>
 <!DOCTYPE html>
@@ -319,7 +332,7 @@ file_put_contents("log.txt", $logLine, FILE_APPEND);
             <div class="login-logo">
                 <img src="assets/umestudij.png" alt="logo">
             </div>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="login-form">
+            <form class="login-form">
                 <div class="login-form-username form-group">
                     <input class="form-control form-control-lg" placeholder="Username" type="text" name="username">
                 </div>
@@ -336,7 +349,8 @@ file_put_contents("log.txt", $logLine, FILE_APPEND);
                         Lost password?
                     </a>
                 </div>
-
+                </form>
+                
                 <div class="login-divider"></div>
 
                 <div class="d-flex">
@@ -361,7 +375,6 @@ file_put_contents("log.txt", $logLine, FILE_APPEND);
                         Cookies notice
                     </button>
                 </div>
-            </form>
         </div>
     </div>
     </div>
