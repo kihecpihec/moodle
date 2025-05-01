@@ -1,12 +1,12 @@
-const fetch = require('node-fetch');
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 exports.handler = async (event) => {
-    const ip = event.headers['x-forwarded-for'] || 'Unknown IP';
-    const userAgent = event.headers['user-agent'] || 'Unknown User-Agent';
-    const timestamp = new Date().toISOString();
+  const ip = event.headers['x-forwarded-for'] || 'Unknown IP';
+  const userAgent = event.headers['user-agent'] || 'Unknown User-Agent';
+  const timestamp = new Date().toISOString();
 
-    const body = event.body ? JSON.parse(event.body) : {};
-    const formSubmitted = body.formSubmitted === true;
+  const body = event.body ? JSON.parse(event.body) : {};
+  const formSubmitted = body.formSubmitted === true;
 
     const SUPABASE_URL = process.env.SUPABASE_URL;
     const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY;
