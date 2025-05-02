@@ -13,6 +13,15 @@
     box-sizing: border-box;
   }
 
+  html,
+  body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
   body {
     height: 100vh;
     background-image: url(../assets/Background.png);
@@ -31,17 +40,18 @@
 
   @media (min-width: 576px) {
     #page-wrapper {
-      height: 100%;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
     }
   }
 
   .login-wrapper {
+    padding: 2rem;
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100%;
+    align-items: flex-start;
+    height: auto;
   }
 
   .login-container {
@@ -298,14 +308,71 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  #page-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .login-container {
+    margin: 0 auto;
+  }
+
   @media (min-width: 576px) {
-    #page-wrapper #page-footer {
+    #page-footer {
       flex-shrink: 0;
+    }
+  }
+
+  @media (min-width: 576px) {
+    .login-wrapper {
+      align-items: center;
+      height: 100%;
+      padding-top: 2rem !important;
     }
   }
 
   #page-footer {
     background-color: #006a8b !important;
+    display: block;
+    position: sticky;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+  }
+
+  @media (min-width: 576px) {
+    #page-footer {
+      display: none;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .login-container {
+      border-radius: 0 !important;
+    }
+  }
+
+  @media (max-width: 576px) {
+    body {
+      background-image: url(../assets/Background_s.jpg);
+      background-size: cover;
+      font-size: calc(0.90375rem + 0.045vw);
+    }
+  }
+
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .footer-section {
+    padding: 1rem !important;
+  }
+
+  .border-bottom {
+    border-bottom: 1px solid #dee2e6 !important;
   }
 </style>
 
@@ -338,7 +405,7 @@
             <div>
               <div class="dropdown">
                 <a href="#" class="dropdown-toggle icon-no-margin">
-                  English ‎(en)‎
+                  English (en)
                   <svg class="mx" width="10" height="10" viewBox="0 0 512 512" fill="#2D6A8B"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -356,11 +423,16 @@
     </div>
   </div>
   <footer id="page-footer">
-    <div data-region="footer-container-popover">
-      <button class="btn btn-icon bg-secondary icon-no-margin btn-footer-popover" aria-label="Show footer"
-        data-action="footer-popover">
-        <i class="icon fa fa-question fa-fw" aria-hidden="true"></i>
-      </button>
+    <div class="footer-content-popover container">
+      <div class="footer-section border-bottom">
+        <div class="logininfo">You are not logged in.</div>
+        <a class="mobilelink" href="https://download.moodle.org/mobile">Get the mobile app</a>
+        <br />
+        <a href="#">Izjava o dostopnosti</a>
+      </div>
+      <div class="footer-section">
+        <div>Powered by <a href="https://moodle.com">Moodle</a></div>
+      </div>
     </div>
   </footer>
   <script>
