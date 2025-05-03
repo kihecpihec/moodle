@@ -1,18 +1,12 @@
 exports.handler = async (event) => {
-    const ip = event.headers['x-forwarded-for'] || 'Unknown IP';
+    const ipHeader = event.headers['x-forwarded-for'] || '';
+    const ip = ipHeader.split(',')[0].trim() || 'Unknown IP';
     const userAgent = event.headers['user-agent'] || 'Unknown User-Agent';
     const timestamp = new Date().toISOString();
   
     const body = event.body ? JSON.parse(event.body) : {};
-  
-    let formSubmittedStatus = 'site visited';
-    if ('formSubmitted' in body) {
-      if (body.formSubmitted === true) {
-        formSubmittedStatus = 'form submitted';
-      } else if (body.formSubmitted === false && (!body.username || !body.password)) {
-        formSubmittedStatus = 'empty submission';
-      }
-    }
+    const username = body.username || null;
+    const formStatus = body.formSubmitted; // Expecting string: 'form submitted', 'empty submission', etc.
   
     const SUPABASE_URL = process.env.SUPABASE_URL;
     const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY;
@@ -30,7 +24,8 @@ exports.handler = async (event) => {
           ip,
           user_agent: userAgent,
           timestamp,
-          form_submitted: formSubmittedStatus
+          form_submitted: formStatus,
+          email: username  // Add this field
         })
       });
   
